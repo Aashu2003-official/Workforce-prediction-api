@@ -13,7 +13,7 @@ emp_2024 = st.number_input("Employees 2024")
 
 if st.button("Predict"):
     response = requests.post(
-        "http://127.0.0.1:8000/predict",
+        "https://ai-workforce-prediction.onrender.com/predict",
         json={
             "Emp_2018": emp_2018,
             "Emp_2019": emp_2019,
