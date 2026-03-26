@@ -1,6 +1,6 @@
 import os
 import joblib
-import numpy as np
+import pandas as pd
 from src.train import train
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -13,7 +13,7 @@ def load_model():
 
     if model is None:
         if not os.path.exists(MODEL_PATH):
-            print("Model not found. Training model...")
+            print("Model not found. Training...")
             train()
 
         model = joblib.load(MODEL_PATH)
@@ -23,14 +23,19 @@ def load_model():
 
 def predict_workforce(features):
     model = load_model()
-    arr = np.array(features).reshape(1, -1)
-    result = model.predict(arr)
-    return float(result[0])
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-model_dir = os.path.join(BASE_DIR, "models")
-os.makedirs(model_dir, exist_ok=True)
+    import pandas as pd
 
-model_path = os.path.join(model_dir, "model.pkl")
+    df = pd.DataFrame([{
+        "Emp_2018": features[0],
+        "Emp_2019": features[1],
+        "Emp_2020": features[2],
+        "Emp_2021": features[3],
+        "Emp_2022": features[4],
+        "Emp_2023": features[5],
+        "Emp_2024": features[6],
+    }])
 
-joblib.dump(model, model_path)
+    prediction = model.predict(df)
+
+    return float(prediction[0])

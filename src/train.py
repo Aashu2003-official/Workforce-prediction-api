@@ -5,20 +5,24 @@ import joblib
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 file_path = os.path.join(BASE_DIR, "data", "companies data.csv")
-
 
 def train():
     df = load_data(file_path)
     df = preprocess_data(df)
-    
-    x, y = select_features(df)
+
+    X, y = select_features(df)
 
     model = RandomForestRegressor()
-    model.fit(x, y)
+    model.fit(X, y)
 
-    joblib.dump(model, "models/model.pkl")
+    model_dir = os.path.join(BASE_DIR, "models")
+    os.makedirs(model_dir, exist_ok=True)
+
+    model_path = os.path.join(model_dir, "model.pkl")
+    joblib.dump(model, model_path)
+
+    print("Model trained and saved!")
 
 if __name__ == "__main__":
     train()

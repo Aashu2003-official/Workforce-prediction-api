@@ -12,7 +12,7 @@ def preprocess_data(data):
     try:
         if "Company" in data.columns:
             data = data.drop(columns=["Company"])
-        data = data.fillna(method='ffill')
+        data = data.ffill()
         
         print("Data preprocessing completed successfully.")
         return data

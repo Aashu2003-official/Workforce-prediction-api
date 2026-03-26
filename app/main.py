@@ -5,13 +5,13 @@ from src.predict import predict_workforce
 app = FastAPI(title="Workforce Prediction API")
 
 class InputData(BaseModel):
-    Emp_2018: int
-    Emp_2019: int
-    Emp_2020: int
-    Emp_2021: int
-    Emp_2022: int
-    Emp_2023: int
-    Emp_2024: int
+    Emp_2018: float
+    Emp_2019: float
+    Emp_2020: float
+    Emp_2021: float
+    Emp_2022: float
+    Emp_2023: float
+    Emp_2024: float
 
 @app.get("/")
 def home():
@@ -28,7 +28,7 @@ def predict(data: InputData):
         data.Emp_2023,
         data.Emp_2024
     ]
-    
+
     prediction = predict_workforce(features)
-    
+
     return {"predicted_2025": prediction}

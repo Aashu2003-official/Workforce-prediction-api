@@ -1,4 +1,4 @@
 def select_features(df):
-    x = df.drop("Emp_2025", axis=1)
+    X = df.drop(columns=["Emp_2025"])
     y = df["Emp_2025"]
-    return x, y
+    return X, y
