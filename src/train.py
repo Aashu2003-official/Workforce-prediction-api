@@ -1,5 +1,5 @@
-from data_preprocessing import load_data, preprocess_data
-from feature_engineering import select_features
+from src.data_preprocessing import load_data, preprocess_data
+from src.feature_engineering import select_features
 from sklearn.ensemble import RandomForestRegressor
 import joblib
 import os
